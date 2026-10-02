@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # 1. MySQL 8.0 Database Server
+  mysql:
+    image: mysql:8.0
+    container_name: wms-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: RootPassword@2026
+      MYSQL_DATABASE: warehouse_db
+      MYSQL_USER: wms_user
+      MYSQL_PASSWORD: WmsPassword@2026
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # 2. phpMyAdmin - Web Database UI (Port 8080)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: wms-phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+
+  # 3. Backend ASP.NET Core 8.0 Web API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: wms-backend
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DatabaseProvider=MySql
+      - ConnectionStrings__MySqlConnection=Server=mysql;Port=3306;Database=warehouse_db;User=wms_user;Password=WmsPassword@2026;CharSet=utf8mb4;
+      - Jwt__Secret=WarehouseManagement_SecretKey_Production_Grade_Security_2026_Minimum_32_Chars!
+      - Jwt__Issuer=WarehouseManagementApi
+      - Jwt__Audience=WarehouseManagementApp
+    ports:
+      - "5000:5000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # 4. Frontend React 19 + Nginx
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: wms-frontend
+    restart: always
+    ports:
+      - "80:80"
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
