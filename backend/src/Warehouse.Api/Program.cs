@@ -7,6 +7,10 @@ using Warehouse.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Cloud Port Binding (Render / Railway / Docker)
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
 // 1. Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)

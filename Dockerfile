@@ -21,7 +21,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
-ENV ASPNETCORE_URLS=http://+:5000
-EXPOSE 5000
+ENV ASPNETCORE_URLS=http://+:5000;http://+:10000;http://+:80
+EXPOSE 5000 10000 80
 
 ENTRYPOINT ["dotnet", "Warehouse.Api.dll"]
