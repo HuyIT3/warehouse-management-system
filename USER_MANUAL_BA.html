@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tài Liệu Đặc Tả Nghiệp Vụ & Hướng Dẫn Vận Hành WMS Pro</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    @page {
+      size: A4;
+      margin: 18mm 15mm 20mm 15mm;
+      @bottom-right {
+        content: "Trang " counter(page);
+        font-family: 'Inter', sans-serif;
+        font-size: 9pt;
+        color: #64748b;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.6;
+      color: #1e293b;
+      background-color: #ffffff;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    /* Cover / Header Section */
+    .header-box {
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .brand-title {
+      font-size: 24pt;
+      font-weight: 800;
+      color: #1e3a8a;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .brand-sub {
+      font-size: 11pt;
+      font-weight: 600;
+      color: #2563eb;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .meta-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 9pt;
+      color: #475569;
+      text-align: right;
+    }
+
+    .meta-box strong {
+      color: #0f172a;
+    }
+
+    /* Headings */
+    h1 {
+      font-size: 16pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid #e2e8f0;
+      page-break-after: avoid;
+    }
+
+    h2 {
+      font-size: 13pt;
+      font-weight: 600;
+      color: #1e40af;
+      margin-top: 18px;
+      margin-bottom: 10px;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 11pt;
+      font-weight: 600;
+      color: #334155;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin-bottom: 10px;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 18px 0;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* Badges & Highlights */
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 8pt;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-green { background: #dcfce7; color: #166534; }
+    .badge-amber { background: #fef3c7; color: #92400e; }
+    .badge-purple { background: #f3e8ff; color: #6b21a8; }
+    .badge-red { background: #fee2e2; color: #991b1b; }
+
+    /* Workflow Cards */
+    .flow-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #2563eb;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      page-break-inside: avoid;
+    }
+
+    .flow-step {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .flow-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      background: #2563eb;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8.5pt;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      flex: 1;
+      font-size: 9.5pt;
+    }
+
+    /* Scenario Card */
+    .scenario-card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      page-break-inside: avoid;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .scenario-header {
+      font-weight: 700;
+      color: #1e3a8a;
+      font-size: 10.5pt;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Code & Pre */
+    code {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 9pt;
+      background: #f1f5f9;
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: #0f172a;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .footer-sign {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      page-break-inside: avoid;
+      text-align: center;
+      font-size: 9.5pt;
+    }
+
+    .sign-col {
+      width: 45%;
+    }
+
+    .sign-space {
+      height: 60px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header-box">
+    <div>
+      <div class="brand-title">WMS Pro</div>
+      <div class="brand-sub">Hệ Thống Quản Lý Kho & Vật Tư Công Nghiệp</div>
+      <div style="font-size: 10pt; color: #64748b; margin-top: 4px;">Tài liệu Đặc Tả Nghiệp Vụ & Hướng Dẫn Vận Hành Hệ Thống (BA Standard)</div>
+    </div>
+    <div class="meta-box">
+      <div><strong>Phiên bản:</strong> 1.0.0 (Release)</div>
+      <div><strong>Ngày phát hành:</strong> 02/10/2026</div>
+      <div><strong>Bộ phận:</strong> Business Analysis & Core Dev</div>
+      <div><strong>Đối tượng:</strong> Ban Giám Đốc, Quản Lý & Vận Hành</div>
+    </div>
+  </div>
+
+  <!-- 1. TỔNG QUAN HỆ THỐNG -->
+  <h1>1. TỔNG QUAN HỆ THỐNG & PHẠM VI ÁP DỤNG</h1>
+  <p>Hệ thống <strong>WMS Pro (Industrial Warehouse Management System)</strong> được nghiên cứu và phát triển nhằm tối ưu hóa toàn diện công tác quản trị dòng vật tư kỹ thuật, linh kiện kim khí, thiết bị điện công nghiệp và tự động hóa trong môi trường nhà máy, kho bãi.</p>
+  
+  <p>Hệ thống giải quyết triệt để 4 mục tiêu trọng tâm:</p>
+  <ul>
+    <li><strong>Minh bạch hóa 100% dòng luân chuyển hàng hóa:</strong> Mọi biến động (Nhập - Xuất - Kiểm kê) đều được ghi nhận dấu vết (Audit Trail) với thời gian thực và người thao tác chính xác.</li>
+    <li><strong>Cắt giảm 80% thời gian tạo đơn nhập:</strong> Hỗ trợ tạo tức thời (on-the-fly) mã vật tư và vị trí kệ mới trực tiếp trên form nhập kho mà không phải rời màn hình.</li>
+    <li><strong>Chống xuất âm & Bảo toàn dữ liệu:</strong> Kiểm soát nghiêm ngặt số lượng khả dụng tại từng ô kệ, tích hợp giao dịch nguyên tử (Atomic DB Transaction) bảo đảm số liệu tồn kho luôn chuẩn xác.</li>
+    <li><strong>Tương thích đa nền tảng:</strong> Giao diện tối ưu cho máy tính quản lý (Desktop) lẫn thiết bị di động/máy tính bảng quét mã tại hiện trường kho (Mobile Flow).</li>
+  </ul>
+
+  <!-- 2. MA TRẬN PHÂN QUYỀN RBAC -->
+  <h1>2. MA TRẬN PHÂN QUYỀN THEO VAI TRÒ (RBAC)</h1>
+  <p>Hệ thống chia làm <strong>6 nhóm vai trò chuyên biệt</strong> bảo đảm tính bảo mật và phân định rõ trách nhiệm:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 18%;">Vai Trò</th>
+        <th style="width: 14%;">Mã Quyền</th>
+        <th style="width: 38%;">Trách Nhiệm Nghiệp Vụ</th>
+        <th style="width: 30%;">Quyền Hạn Nổi Bật</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Quản Trị Viên</strong></td>
+        <td><span class="badge badge-red">ADMIN</span></td>
+        <td>Quản trị hệ thống, cấp phát tài khoản, phân quyền nhân sự.</td>
+        <td>Toàn quyền cấu hình, CRUD Users, Master Data.</td>
+      </tr>
+      <tr>
+        <td><strong>Quản Lý Kho</strong></td>
+        <td><span class="badge badge-amber">MANAGER</span></td>
+        <td>Giám sát KPI kho, duyệt phiếu nhập, theo dõi báo cáo biến động.</td>
+        <td>Xem toàn bộ Dashboard, duyệt/hủy phiếu nhập.</td>
+      </tr>
+      <tr>
+        <td><strong>NV Nhập Kho</strong></td>
+        <td><span class="badge badge-blue">INBOUND_STAFF</span></td>
+        <td>Tiếp nhận hàng từ NCC, kiểm đếm, tạo phiếu nhập, in phiếu.</td>
+        <td>Lập phiếu nhập, tạo nhanh Mã/Kệ, in phiếu giao nhận.</td>
+      </tr>
+      <tr>
+        <td><strong>NV Xuất Kho</strong></td>
+        <td><span class="badge badge-purple">OUTBOUND_STAFF</span></td>
+        <td>Xuất cấp phát vật tư cho sản xuất, công trình hoặc bảo trì.</td>
+        <td>Xuất kho tại kệ, kiểm tra tồn khả dụng.</td>
+      </tr>
+      <tr>
+        <td><strong>NV Kiểm Kê</strong></td>
+        <td><span class="badge badge-green">AUDITOR</span></td>
+        <td>Kiểm đếm thực tế, đối soát chênh lệch, cân đối hao hụt.</td>
+        <td>Lập phiếu điều chỉnh (Adjustment) giải trình lý do.</td>
+      </tr>
+      <tr>
+        <td><strong>NV Kho Tổng Hợp</strong></td>
+        <td><span class="badge badge-blue">WAREHOUSE_STAFF</span></td>
+        <td>Nhân viên vận hành đa nhiệm tại hiện trường kho.</td>
+        <td>Thao tác nhanh Nhập/Xuất trên thiết bị di động.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 3. DANH SÁCH TÀI KHOẢN TEST -->
+  <h1>3. DANH SÁCH TÀI KHOẢN THỰC NGHIỆM (DEMO ACCOUNTS)</h1>
+  <p>Toàn bộ tài khoản đã được nạp sẵn dữ liệu thử nghiệm chuẩn trên hệ thống:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Vai Trò</th>
+        <th>Tài Khoản (Username)</th>
+        <th>Mật Khẩu</th>
+        <th>Họ Và Tên Nhân Sự</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Quản Trị Viên</td>
+        <td><code>admin</code></td>
+        <td><code>Admin@123</code></td>
+        <td>Quản Trị Viên Hệ Thống</td>
+      </tr>
+      <tr>
+        <td>Quản Lý Kho</td>
+        <td><code>manager</code></td>
+        <td><code>Manager@123</code></td>
+        <td>Nguyễn Trọng Quản (Quản lý kho)</td>
+      </tr>
+      <tr>
+        <td>NV Nhập Kho</td>
+        <td><code>inbound1</code></td>
+        <td><code>Staff@123</code></td>
+        <td>Lê Văn Nhập (NV Nhập kho)</td>
+      </tr>
+      <tr>
+        <td>NV Xuất Kho</td>
+        <td><code>outbound1</code></td>
+        <td><code>Staff@123</code></td>
+        <td>Phạm Thị Xuất (NV Xuất kho)</td>
+      </tr>
+      <tr>
+        <td>NV Kiểm Kê</td>
+        <td><code>auditor1</code></td>
+        <td><code>Staff@123</code></td>
+        <td>Hoàng Minh Kiểm (NV Kiểm kê)</td>
+      </tr>
+      <tr>
+        <td>NV Kho Tổng Hợp</td>
+        <td><code>staff1</code></td>
+        <td><code>Staff@123</code></td>
+        <td>Nguyễn Văn An (NV Kho tổng hợp)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- 4. QUY TRÌNH NGHIỆP VỤ CHUẨN (SOP) -->
+  <h1>4. QUY TRÌNH NGHIỆP VỤ CHUẨN (SOP)</h1>
+
+  <h2>4.1. Quy trình Nhập Kho Đa Mặt Hàng & In Phiếu</h2>
+  <div class="flow-box">
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Tiếp nhận & Lập phiếu:</strong> NV Nhập kho vào phân hệ <em>Phiếu Nhập Kho (Inbound)</em> ➔ Chọn <em>+ Tạo Phiếu Nhập Mới</em>.</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Điền thông tin giao nhận:</strong> Tên Nhà cung cấp, Số đơn hàng PO/Hóa đơn, Ghi chú đính kèm.</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Thêm mặt hàng & Tạo nhanh Mã/Kệ:</strong> Chọn vật tư và ô kệ lưu trữ. Nếu có mã hàng hoặc ô kệ mới, bấm <em>+ Thêm mới / + Tạo kệ</em> để tạo trực tiếp.</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>Xác nhận hoàn tất:</strong> Chọn <em>Lưu & Hoàn Tất Nhập Kho</em> (Tồn kho tự động tăng, sinh nhật ký giao dịch <code>IN</code>).</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">5</div>
+      <div class="step-text"><strong>In phiếu bàn giao:</strong> Bấm 🖨️ <em>In Phiếu</em> để in phiếu nhập kho chuẩn A4/A5 ký nhận với bên giao hàng.</div>
+    </div>
+  </div>
+
+  <h2>4.2. Quy trình Xuất Kho Phục Vụ Sản Xuất & Chống Xuất Âm</h2>
+  <div class="flow-box">
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Chọn vật tư xuất:</strong> NV Xuất kho vào <em>Xuất Vật Tư (Mobile Flow)</em>, chọn vật tư cần xuất. Hệ thống liệt kê toàn bộ vị trí kệ và số lượng tồn hiện có.</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Kiểm tra tồn khả dụng:</strong> Nhập số lượng cần xuất. Nếu số lượng &gt; Tồn thực tế tại kệ, hệ thống khóa nút xuất và báo lỗi <em>Insufficient Stock</em>.</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Cập nhật trừ kho:</strong> Bấm <em>Xác Nhận Xuất Vật Tư</em> ➔ Tồn kho giảm, ghi nhận giao dịch <code>OUT</code> vào lịch sử biến động.</div>
+    </div>
+  </div>
+
+  <h2>4.3. Quy trình Kiểm Kê & Cân Đối Hao Hụt (Adjustment)</h2>
+  <div class="flow-box">
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Kiểm đếm thực địa:</strong> Nhân viên kiểm kê đối chiếu số đếm thực tế tại kệ với số tồn trên phân hệ <em>Tra Cứu Tồn Kho</em>.</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Lập điều chỉnh:</strong> Khi có chênh lệch hao hụt, chọn <em>Điều Chỉnh Tồn Kho</em> ➔ Nhập số lượng điều chỉnh kèm <em>Lý do giải trình</em>.</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Ghi nhận Audit:</strong> Hệ thống tự động cân đối lại số tồn kho và ghi nhật ký loại <code>ADJUSTMENT</code> phục vụ kiểm toán nội bộ.</div>
+    </div>
+  </div>
+
+  <!-- 5. KỊCH BẢN DEMO 3 PHÚT DÀNH CHO LÃNH ĐẠO -->
+  <h1>5. KỊCH BẢN DEMO 3 PHÚT TRÌNH DIỄN CHO BAN GIÁM ĐỐC</h1>
+
+  <div class="scenario-card">
+    <div class="scenario-header">🎬 Kịch bản 1: Giám đốc / Quản lý kiểm tra tình trạng kho (1 phút)</div>
+    <p>1. Đăng nhập tài khoản: <code>manager</code> / <code>Manager@123</code>.</p>
+    <p>2. Trình chiếu <strong>Bảng Dashboard KPI</strong>: Giới thiệu tổng lượng tồn, tổng mã hàng và đặc biệt là <strong>Cảnh Báo Sắp Hết Hàng</strong> (hiện rõ 3 mặt hàng dưới ngưỡng tồn an toàn).</p>
+    <p>3. Chỉ ra <strong>Biểu đồ luân chuyển 7 ngày</strong> đối sánh khối lượng Nhập (Xanh) và Xuất (Cam).</p>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-header">🎬 Kịch bản 2: Nhập kho đa mặt hàng, tạo mã tức thì & In phiếu (1.5 phút)</div>
+    <p>1. Đăng nhập tài khoản: <code>inbound1</code> / <code>Staff@123</code>.</p>
+    <p>2. Vào <strong>Phiếu Nhập Kho</strong> ➔ Bấm <em>+ Tạo Phiếu Nhập Mới</em>.</p>
+    <p>3. Thử nghiệm tính năng tạo nhanh: Bấm <em>+ Thêm mới</em> tạo mã <code>VT010 - Van khí nén Festo</code>, bấm <em>+ Tạo kệ</em> tạo kệ mới <code>D01-01</code>.</p>
+    <p>4. Bấm <em>Lưu & Hoàn Tất</em> ➔ Bấm nút 🖨️ <em>In Phiếu</em> để trình diễn mẫu phiếu nhập chuyên nghiệp.</p>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-header">🎬 Kịch bản 3: Thao tác xuất kho Mobile & Thuật toán chống xuất âm (30 giây)</div>
+    <p>1. Đăng nhập tài khoản: <code>outbound1</code> / <code>Staff@123</code>.</p>
+    <p>2. Vào mục <strong>Xuất Vật Tư (Mobile Flow)</strong>, chọn vật tư <code>VT007</code> (chỉ còn tồn 4 cái).</p>
+    <p>3. Gõ thử số lượng <code>10</code> ➔ Xem thông báo hệ thống tự động khóa không cho xuất.</p>
+    <p>4. Gõ số lượng hợp lệ <code>2</code> ➔ Xác nhận xuất thành công và xem tồn kho giảm ngay lập tức.</p>
+  </div>
+
+  <!-- 6. CHỮ KÝ PHÊ DUYỆT -->
+  <div class="footer-sign">
+    <div class="sign-col">
+      <p><strong>ĐẠI DIỆN ĐỘI NGŨ PHÁT TRIỂN / BA</strong></p>
+      <div class="sign-space"></div>
+      <p><em>(Ký & ghi rõ họ tên)</em></p>
+    </div>
+    <div class="sign-col">
+      <p><strong>ĐẠI DIỆN BAN GIÁM ĐỐC / QUẢN LÝ KHO</strong></p>
+      <div class="sign-space"></div>
+      <p><em>(Ký & ghi rõ họ tên)</em></p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
