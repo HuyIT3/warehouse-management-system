@@ -28,6 +28,7 @@ public class CreateMaterialRequest
 
 public class UpdateMaterialRequest
 {
+    public string MaterialCode { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string Unit { get; set; } = string.Empty;
     public int MinStock { get; set; } = 0;

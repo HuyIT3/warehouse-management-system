@@ -201,6 +201,16 @@ public class MaterialService : IMaterialService
         if (material == null)
             throw new NotFoundException("Vật tư", id);
 
+        var newCode = request.MaterialCode.Trim().ToUpper();
+        if (!string.Equals(material.MaterialCode, newCode, StringComparison.OrdinalIgnoreCase))
+        {
+            var codeExists = await _context.Materials.AnyAsync(m => m.Id != id && m.MaterialCode.ToLower() == newCode.ToLower());
+            if (codeExists)
+                throw new ConflictException($"Mã vật tư '{newCode}' đã tồn tại trong hệ thống. Vui lòng chọn mã khác.");
+
+            material.MaterialCode = newCode;
+        }
+
         material.Name = request.Name.Trim();
         material.Unit = request.Unit.Trim();
         material.MinStock = request.MinStock;

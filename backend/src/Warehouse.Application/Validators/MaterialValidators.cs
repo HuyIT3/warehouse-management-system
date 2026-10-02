@@ -10,7 +10,7 @@ public class CreateMaterialRequestValidator : AbstractValidator<CreateMaterialRe
         RuleFor(x => x.MaterialCode)
             .NotEmpty().WithMessage("Mã vật tư không được để trống.")
             .MaximumLength(50).WithMessage("Mã vật tư không được vượt quá 50 ký tự.")
-            .Matches(@"^[a-zA-Z0-9\-_]+$").WithMessage("Mã vật tư chỉ được chứa chữ cái, chữ số, dấu gạch ngang và gạch dưới.");
+            .Matches(@"^[a-zA-Z0-9\-_./]+$").WithMessage("Mã vật tư chỉ được chứa chữ cái, chữ số, dấu gạch ngang, gạch dưới, dấu chấm và gạch chéo.");
 
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Tên vật tư không được để trống.")
@@ -29,6 +29,11 @@ public class UpdateMaterialRequestValidator : AbstractValidator<UpdateMaterialRe
 {
     public UpdateMaterialRequestValidator()
     {
+        RuleFor(x => x.MaterialCode)
+            .NotEmpty().WithMessage("Mã vật tư không được để trống.")
+            .MaximumLength(50).WithMessage("Mã vật tư không được vượt quá 50 ký tự.")
+            .Matches(@"^[a-zA-Z0-9\-_./]+$").WithMessage("Mã vật tư chỉ được chứa chữ cái, chữ số, dấu gạch ngang, gạch dưới, dấu chấm và gạch chéo.");
+
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Tên vật tư không được để trống.")
             .MaximumLength(200).WithMessage("Tên vật tư không được vượt quá 200 ký tự.");

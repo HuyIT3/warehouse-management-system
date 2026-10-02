@@ -63,6 +63,7 @@ export const materialApi = {
     return res.data;
   },
   update: async (id: number, data: {
+    materialCode: string;
     name: string;
     unit: string;
     minStock: number;

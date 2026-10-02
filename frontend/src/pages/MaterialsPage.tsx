@@ -43,7 +43,8 @@ export const MaterialsPage: React.FC = () => {
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { isAdmin } = useAuth();
+  const { isAdmin, isManager, isInboundStaff } = useAuth();
+  const canManage = isAdmin || isManager || isInboundStaff;
 
   const loadMaterials = async () => {
     setIsLoading(true);
@@ -132,6 +133,7 @@ export const MaterialsPage: React.FC = () => {
     setFormError(null);
     try {
       const res = await materialApi.update(editingMaterial.id, {
+        materialCode: formData.materialCode.trim().toUpperCase(),
         name: formData.name,
         unit: formData.unit,
         minStock: formData.minStock,
@@ -176,7 +178,7 @@ export const MaterialsPage: React.FC = () => {
           </p>
         </div>
 
-        {isAdmin && (
+        {canManage && (
           <button
             onClick={handleOpenCreate}
             className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-blue-600/25 transition-all self-start sm:self-auto"
@@ -300,23 +302,23 @@ export const MaterialsPage: React.FC = () => {
                           <ArrowDownLeft className="w-3.5 h-3.5" />
                         </Link>
 
+                        {canManage && (
+                          <button
+                            onClick={() => handleOpenEdit(m)}
+                            className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+                            title="Chỉnh sửa mã & thông tin vật tư"
+                          >
+                            <Edit2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
                         {isAdmin && (
-                          <>
-                            <button
-                              onClick={() => handleOpenEdit(m)}
-                              className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
-                              title="Chỉnh sửa"
-                            >
-                              <Edit2 className="w-3.5 h-3.5" />
-                            </button>
-                            <button
-                              onClick={() => handleDelete(m)}
-                              className="p-1.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/60 text-rose-400 border border-rose-800/40 transition-colors"
-                              title="Xóa vật tư"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
-                          </>
+                          <button
+                            onClick={() => handleDelete(m)}
+                            className="p-1.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/60 text-rose-400 border border-rose-800/40 transition-colors"
+                            title="Xóa vật tư"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
                         )}
                       </div>
                     </td>
@@ -413,15 +415,23 @@ export const MaterialsPage: React.FC = () => {
           )}
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Mã vật tư (Bắt buộc)</label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-semibold text-slate-300">
+                Mã vật tư (Nhập tay tự do)
+              </label>
+              <span className="text-[10px] text-emerald-400 font-mono">Tùy biến 100%</span>
+            </div>
             <input
               type="text"
               value={formData.materialCode}
-              onChange={(e) => setFormData({ ...formData, materialCode: e.target.value })}
-              placeholder="VD: VT009, BULONG-M10..."
-              className="w-full px-3.5 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-100 uppercase"
+              onChange={(e) => setFormData({ ...formData, materialCode: e.target.value.toUpperCase() })}
+              placeholder="VD: SKF-6204-2RSH, SCH-LC1D25, BL-INOX-M8X30, VT009..."
+              className="w-full px-3.5 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-100 font-mono font-bold tracking-wide focus:outline-none focus:border-blue-500 uppercase"
               required
             />
+            <p className="text-[10px] text-slate-500 mt-1">
+              Nhập mã linh kiện thực tế, mã phụ tùng OEM hoặc quy ước mã số của công ty.
+            </p>
           </div>
 
           <div>
@@ -514,6 +524,26 @@ export const MaterialsPage: React.FC = () => {
               {formError}
             </div>
           )}
+
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-semibold text-slate-300">
+                Mã vật tư (Nhập tay / Tự do sửa đổi)
+              </label>
+              <span className="text-[10px] text-blue-400 font-mono">Nhập tay tự do</span>
+            </div>
+            <input
+              type="text"
+              value={formData.materialCode}
+              onChange={(e) => setFormData({ ...formData, materialCode: e.target.value.toUpperCase() })}
+              placeholder="VD: SKF-6204-2RSH, SCH-LC1D25, BULONG-M8X30..."
+              className="w-full px-3.5 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs text-slate-100 font-mono font-bold tracking-wide focus:outline-none focus:border-blue-500 uppercase"
+              required
+            />
+            <p className="text-[10px] text-slate-500 mt-1">
+              Hệ thống cho phép tự nhập mã mới hoặc đổi mã theo quy ước mã hóa thực tế của doanh nghiệp.
+            </p>
+          </div>
 
           <div>
             <label className="block text-xs font-semibold text-slate-300 mb-1">Tên vật tư</label>
